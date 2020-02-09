@@ -2,3 +2,8 @@ cmake-build-debug
 cmake-build-release
 .idea
 .vs
+*.exe
+*.lib
+*.so
+*.a
+*.dylib
