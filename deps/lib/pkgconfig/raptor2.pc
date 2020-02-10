@@ -1,0 +1,11 @@
+prefix=D:/libsemsim2/deps
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/raptor2
+
+Name: Raptor RDF Parsing Library
+Description: RDF Parser Toolkit Library
+Version: 2.0.16
+Libs: -L${libdir} -lraptor2
+Libs.private:  
+Cflags: -I${includedir}

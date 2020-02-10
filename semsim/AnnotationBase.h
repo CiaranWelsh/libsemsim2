@@ -1,9 +1,9 @@
 # ifndef SEMSIM_ANNOTATION_BASE_H_
 # define SEMSIM_ANNOTATION_BASE_H_
 
-# include "semsim/Preproc.h"
-# include "semsim/util/UniquePtr.h"
-# include "semsim/PhysicalProperty.h"
+# include "Preproc.h"
+# include "util/UniquePtr.h"
+# include "PhysicalProperty.h"
 
 # include <raptor2.h>
 

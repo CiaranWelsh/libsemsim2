@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libSemSim: Enabling Better Semantic Information in Systems Biology Models &mdash; SemSim 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="C++ API" href="cppapi/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> SemSim
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cppapi/index.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">SemSim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>libSemSim: Enabling Better Semantic Information in Systems Biology Models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libsemsim-enabling-better-semantic-information-in-systems-biology-models">
+<h1>libSemSim: Enabling Better Semantic Information in Systems Biology Models<a class="headerlink" href="#libsemsim-enabling-better-semantic-information-in-systems-biology-models" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Traditionally, biological models have often been constructed with more
+attention to the <em>mathematical</em> detail of their encoding than
+the <em>biological</em> concepts they represent.</p>
+<p>Consider models in the online <a class="reference external" href="https://www.ebi.ac.uk/biomodels/">BioModels repository</a>.
+These models are encoded in the <a class="reference external" href="http://sbml.org/Main_Page">Systems Biology Markup Language (SBML)</a>,
+which describes the states (“species” in SBML) and processes (“reactions” in SBML) that make up a dynamical system.
+From a purely mathematical perspective, this state/process representation can be translated directly
+into a set of differential equations (for deterministic simulations) or master equations (for stochastic simulations).
+This, the following would be a valid SBML model (using <a class="reference external" href="http://antimony.sourceforge.net/">Antimony</a> syntax):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># a reaction J0 converts A to B</span>
+<span class="n">var</span> <span class="n">species</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span>
+<span class="n">J0</span><span class="p">:</span> <span class="n">A</span> <span class="o">-&gt;</span> <span class="n">B</span><span class="p">;</span> <span class="n">k</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">C</span>
+<span class="c1"># variable initializations</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>However, this example is completely nonsensical from a biological perspective.
+What are the quantities A, B, and C? What is the process J0?
+To encode this information, SBML uses controlled-vocabulary (CV) terms to connect
+model elements to <em>resources</em>, which are URIs that point to ontology terms
+describing what the elements are intended to represent in the physical world.
+In the preceding example, assume that the reaction in question was
+the conversion of phosphoenol pyruvate (<cite>A</cite>) to pyruvate (<cite>B</cite>) by the enzyme pyruvate kinase (<cite>C</cite>).
+Chemical entities such as metabolites can be described via the ChEBI database:
+the <a class="reference external" href="https://identifiers.org/CHEBI:18021">CHEBI:18021</a> term describes phosphoenol pyruvate
+and <a class="reference external" href="https://identifiers.org/CHEBI:15361">CHEBI:15361</a> describes pyruvate.
+The pyruvate kinase enzyme can be described by the <a class="reference external" href="http://bioportal.bioontology.org/ontologies/PR?p=summary">Protein Ontology (PR)</a> as
+<a class="reference external" href="https://identifiers.org/pr/PR:000023655">PR_000023655</a> (if amino acid sequence / organism of origin is not important)
+or <a class="reference external" href="https://www.uniprot.org/">UniProt</a> (if amino acid sequence / organism <em>is</em> important).
+Using these ontology terms, we can encode the <em>chemical identity</em> of the variables
+in the model, but there are still quite a few key pieces of biological information that are missing.
+<em>Where</em> does this reaction take place? <em>What</em> type(s) of cell does it occur in?
+Some of this information can also be encoded in / extracted from SBML with some difficulty, but not in a form suitable
+for automated semantic logic (such as would be possible using <a class="reference external" href="https://www.w3.org/TR/owl2-overview/">OWL</a>).</p>
+<p>Semantic annotations play an even more important role in CellML models.
+Unlike SBML, CellML does not have a structured way of specifying what model elements represent
+(abstractions such as species, reactions, and comaprtments are lost).
+Thus, semantic annotations are the only way to establish biological meaning in CellML models.</p>
+<p>To address these drawbacks, we previously developed <a class="reference external" href="http://sbp.bhi.washington.edu/projects/semgen">SimSem/SemGen</a>.
+SemSim is a library for working with semantic annotations in SBML and CellML models, and SemGen
+is a GUI application for annotating models <a class="bibtex reference internal" href="#bioinformatics-bty829" id="id1">[2]</a>.
+Both SemSim and SemGen were written in Java.
+This project (libSemSim) aims to provide a C++ / Python (via an extension module) implementation with a lean / reduced feature set.</p>
+<p>In both projects (Java/C++), the main goal is to provide a tool for working with <em>composite annotations</em>,
+which are designed to address the limitations of current annotation systems in CellML and SBML.
+We have previously described the benefits and use cases of composite annotations
+<a class="bibtex reference internal" href="#gennari2011multiple" id="id2">[1]</a><a class="bibtex reference internal" href="#neal2018harmonizing" id="id3">[3]</a>.</p>
+</div>
+<div class="section" id="basic-usage">
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
+<p>There are two principal classes in libSemSim: <a class="reference internal" href="cppapi/singular_annotation.html#singularannotation"><span class="std std-ref">SingularAnnotation</span></a> and <a class="reference internal" href="cppapi/composite_annotation.html#compositeannotation"><span class="std std-ref">CompositeAnnotation</span></a>.
+Singular annotations are equivalent to traditional MIRIAM annotations <a class="bibtex reference internal" href="#novere2005" id="id4">[4]</a> (using SBML CV terms) and are only useful for linking
+model elements to ontology terms.
+They allow the user to describe the <em>chemical identity</em> of an SBML species (for example).
+Composite annotations are much more expressive.
+In addition to describing the chemical identity of a model element, they
+allow for describing <em>physical quantity</em> being modeled (is it a molecule concentration or amount?),
+the <em>physical domain</em> where the model element occurs (e.g. the cytosol, nucleus, mitochondrion intermembrane space, etc.),
+and the <em>cell type</em> being model (e.g. a pancreatic beta cell).
+While SBML currently allows expressing some (but not all) of these concepts, extracting this
+information requires considerable effort.
+On the other hand, libSemSim uses RDF files contained in <a class="reference external" href="https://combinearchive.org/index/">COMBINE Archives</a> for encoding all annotation`information.
+The RDF content is suitable for querying or using with semantic reasoning engines such as <a class="reference external" href="https://www.w3.org/OWL/">OWL</a>.`</p>
+</div>
+<div class="section" id="reading-constructing-models">
+<h1>Reading / Constructing Models<a class="headerlink" href="#reading-constructing-models" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="cppapi/model.html#model"><span class="std std-ref">Models</span></a> in libSemSim are essentially shadowed copies of SBML or CellML models
+containing additional semantic information encoded in the two major annotation classes mentioned above.
+In most cases, you will construct a libSemSim model by first reading in an SBML or CellML model,
+adding semantic information via <a class="reference internal" href="cppapi/composite_annotation.html#compositeannotation"><span class="std std-ref">CompositeAnnotations</span></a>, and writing the results
+to a COMBINE Archive containing the original SBML / CellML model and an RDF file containing all annotation information.
+By default, libSemSim will strip the annotation information out of an SBML or CellML model and encode it in RDF instead.</p>
+<p>TODO: code example</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cppapi/index.html">C++ API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/uri.html">URI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/relation.html">Relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/biomodels_qualifiers.html">Biomodels Qualifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/entity.html">Entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/entity_descriptor.html">EntityDescriptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/descriptor_term.html">DescriptorTerm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/physical_property.html">PhysicalProperty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/composite_annotation.html">CompositeAnnotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/singular_annotation.html">SingularAnnotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/component.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/ontologies.html">Ontologies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cppapi/ontology.html">Ontology Base CLass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cppapi/chebi.html">CHEBI Ontology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cppapi/opb.html">OPB Ontology</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cppapi/sbml.html">SBML Import / Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cppapi/sbml_importer.html">SBMLImporter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cppapi/sbml_functions.html">SBML Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/cpp/index.html">C++</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/cpp/create_sbml_model.html">Create &amp; Annotate An SBML Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/python/index.html">Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/python/create_sbml_model.html">Create &amp; Annotate An SBML Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p id="bibtex-bibliography-index-0"><dl class="citation">
+<dt class="bibtex label" id="gennari2011multiple"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>John H Gennari, Maxwell L Neal, Michal Galdzicki, and Daniel L Cook. Multiple ontologies in action: composite annotations for biosimulation models. <em>Journal of biomedical informatics</em>, 44(1):146–154, 2011.</p>
+</dd>
+<dt class="bibtex label" id="bioinformatics-bty829"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Maxwell L Neal, Christopher T Thompson, Karam G Kim, Ryan C James, Daniel L Cook, Brian E Carlson, and John H Gennari. SemGen: a tool for semantics-based annotation and composition of biosimulation models. <em>Bioinformatics</em>, 35(9):1600–1602, 09 2018. <a class="reference external" href="https://doi.org/10.1093/bioinformatics/bty829">doi:10.1093/bioinformatics/bty829</a>.</p>
+</dd>
+<dt class="bibtex label" id="neal2018harmonizing"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Maxwell Lewis Neal, Matthias König, David Nickerson, Göksel Mısırlı, Reza Kalbasi, Andreas Dräger, Koray Atalag, Vijayalakshmi Chelliah, Michael T Cooling, Daniel L Cook, Sharon Crook, Miguel de Alba, Samuel H Friedman, Alan Garny, John H Gennari, Padraig Gleeson, Martin Golebiewski, Michael Hucka, Nick Juty, Chris Myers, Brett G Olivier, Herbert M Sauro, Martin Scharm, Jacky L Snoep, Vasundra Touré, Anil Wipat, Olaf Wolkenhauer, and Dagmar Waltemath. Harmonizing semantic annotations for computational models in biology. <em>Briefings in Bioinformatics</em>, 20(2):540–550, 11 2018. <a class="reference external" href="https://doi.org/10.1093/bib/bby087">doi:10.1093/bib/bby087</a>.</p>
+</dd>
+<dt class="bibtex label" id="novere2005"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>Nicolas Le Novère, Andrew Finney, Michael Hucka, Upinder S. Bhalla, Fabien Campagne, Julio Collado-Vides, Edmund J. Crampin, Matt Halstead, Edda Klipp, Pedro Mendes, Poul Nielsen, Herbert Sauro, Bruce Shapiro, Jacky L. Snoep, Hugh D. Spence, and Barry L. Wanner. Minimum information requested in the annotation of biochemical models (miriam). <em>Nature Biotechnology</em>, 23(12):1509–1515, 2005. URL: <a class="reference external" href="https://doi.org/10.1038/nbt1156">https://doi.org/10.1038/nbt1156</a>, <a class="reference external" href="https://doi.org/10.1038/nbt1156">doi:10.1038/nbt1156</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cppapi/index.html" class="btn btn-neutral float-right" title="C++ API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J Kyle Medley, Prakhar Agarwal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

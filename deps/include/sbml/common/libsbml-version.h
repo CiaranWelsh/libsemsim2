@@ -4,7 +4,7 @@
  * @author  Michael Hucka
  *
  * $Id: libsbml-version.h.in 10126 2009-08-28 12:16:07Z sarahkeating $
- * $HeadURL: https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/libsbml/semsim/common/libsbml-version.h.in $
+ * $HeadURL: https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/libsbml/src/common/libsbml-version.h.in $
  *
  *<!---------------------------------------------------------------------------
  * This file is part of libSBML.  Please visit http://sbml.org for more
