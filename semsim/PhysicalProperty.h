@@ -1,8 +1,8 @@
 # ifndef SEMSIM_PHYSICAL_PROPERTY_H_
 # define SEMSIM_PHYSICAL_PROPERTY_H_
 
-# include "semsim/Preproc.h"
-# include "semsim/Resource.h"
+# include "Preproc.h"
+# include "Resource.h"
 
 namespace semsim {
     /**

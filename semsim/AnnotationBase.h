@@ -2,7 +2,6 @@
 # define SEMSIM_ANNOTATION_BASE_H_
 
 # include "Preproc.h"
-# include "util/UniquePtr.h"
 # include "PhysicalProperty.h"
 
 # include <raptor2.h>
@@ -44,7 +43,7 @@ namespace semsim {
          * @param prop The physical property to assign to the composite annotation.
          * @return A new composite annotation
          */
-        virtual UniquePtr<AnnotationBase>::type makeComposite(const PhysicalProperty& prop) const = 0;
+        virtual std::unique_ptr<AnnotationBase> makeComposite(const PhysicalProperty& prop) const = 0;
 
         /**
          * Return a human--readable representation of the annotation
@@ -63,7 +62,7 @@ namespace semsim {
      * (either @ref CompositeAnnotation or @ref SingularAnnotation).
      * @see UniquePtr.
      */
-    typedef UniquePtr<AnnotationBase>::type AnnotationPtr;
+    typedef std::unique_ptr<AnnotationBase> AnnotationPtr;
 }
 
 # endif

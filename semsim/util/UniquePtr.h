@@ -3,11 +3,7 @@
 
 # include "Preproc.h"
 
-# if __cplusplus >= 201103L
 # include <memory>
-# else
-# include <tr1/memory>
-# endif
 
 
 namespace semsim {
