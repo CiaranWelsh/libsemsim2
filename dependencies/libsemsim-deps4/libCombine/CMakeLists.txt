@@ -218,10 +218,9 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
   CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
 endif ()
 
-message(STATUS "deps dir ${DEPS_DIR}")
+message(STATUS "DEPENDENCY_DIR ${DEPENDENCY_DIR}")
 # Set the default dependency directory.
-set(COMBINE_DEPENDENCY_DIR ${DEPS_DIR} CACHE PATH
-        "Directory containing libraries that libCombine depends upon. (Particularly important on Windows.)")
+set(COMBINE_DEPENDENCY_DIR ${DEPENDENCY_DIR}) #CACHE PATH "Directory containing libraries that libCombine depends upon. (Particularly important on Windows.)")
 #if ("${COMBINE_DEPENDENCY_DIR}" STREQUAL "")
 #    set(COMBINE_DEPENDENCY_DIR ${CMAKE_SOURCE_DIR}/dependencies/ CACHE PATH
 #            "Directory containing libraries that libCombine depends upon. (Particularly important on Windows.)" FORCE)
@@ -291,15 +290,21 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_P
 #
 # Locate libsbml
 #
-message(STATUS "${DEPS_DIR}")
+
 find_package(LIBSBML REQUIRED
         PATHS
-        ${DEPS_LIB_DIR}/cmake
+        ${DEPENDENCY_LIB_DIR}/cmake
         )
 
-MESSAGE(STATUS "LIBSBMK ${LIBSBML_INCLUDE_DIR}")
-SET(LIBSBML_INCLUDE_DIR ${DEPS_INCLUDE_DIR})
-SET(LIBSBML_LIB_DIR ${DEPS_LIB_DIR}/libsbml.lib)
+SET(LIBSBML_INCLUDE_DIR ${DEPENDENCY_INCLUDE_DIR})
+SET(LIBSBML_LIBRARY ${DEPENDENCY_LIB_DIR}/libsbml.lib)
+SET(LIBSBML_STATIC_LIB ${DEPENDENCY_LIB_DIR}/libsbml-static.lib)
+
+SET(ZIPPER_LIBRARY ${DEPENDENCY_LIB_DIR}/libZipper-static.lib)
+SET(ZIPPER_INCLUDE_DIR ${DEPENDENCY_INCLUDE_DIR})
+
+SET(LIBZ_INCLUDE_DIR ${DEPENDENCY_INCLUDE_DIR})
+SET(LIBZ_LIBRARY ${DEPENDENCY_LIB_DIR}/zdll.lib)
 
 
 # detect zipper library if sources are not included
@@ -313,7 +318,7 @@ if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/zipper)
             ${ADDITIONAL_LIB_DIRS}
             $ENV{ZLIBROOT}/lib
             ${CONAN_LIB_DIRS_ZIPPER}
-            ${DEPS_LIB_DIR}
+            ${DEPENDENCY_LIB_DIR}
             DOC "The file name of the ZIPPER library."
             )
 
@@ -325,7 +330,7 @@ if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/zipper)
             ${COMBINE_DEPENDENCY_DIR}/include
             $ENV{ZLIBROOT}/include
             ${CONAN_INCLUDE_DIRS_ZIPPER}
-            ${DEPS_INCLUDE_DIR}
+            ${DEPENDENCY_INCLUDE_DIR}
             NO_DEFAULT_PATH
             DOC "The directory containing the ZIPPER include files."
             )
@@ -433,8 +438,6 @@ if (LIBZ_LIBRARY)
     set(LIBCOMBINE_LIBS ${LIBCOMBINE_LIBS} ${LIBZ_LIBRARY})
 endif ()
 
-set(LIBSBML_LIBRARY ${DEPS_LIB_DIR}/libsbml.lib)
-message(STATUS "LIBSBML_LIBRARY: ${LIBSBML_LIBRARY}")
 if (LIBSBML_LIBRARY_NAME)
     set(LIBCOMBINE_LIBS ${LIBCOMBINE_LIBS} ${LIBSBML_LIBRARY_NAME})
 elseif (LIBSBML_LIBRARY)

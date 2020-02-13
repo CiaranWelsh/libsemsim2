@@ -31,8 +31,6 @@
 #
 ###############################################################################
 
-#cmake_minimum_required(VERSION 2.6)
-#project(libsbml)
 
 if (POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
@@ -315,27 +313,20 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
 or CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
 endif ()
 
-# Set the default dependency directory.
-set(LIBSBML_DEPENDENCY_DIR ${DEPS_DIR} CACHE PATH "Directory containing libraries that libSBML depends upon. (Particularly important on Windows.)")
-#if ("${LIBSBML_DEPENDENCY_DIR}" STREQUAL "")
-#    set(LIBSBML_DEPENDENCY_DIR ${DEPS_DIR} CACHE PATH
-#            "Directory containing libraries that libSBML depends upon.
-#(Particularly important on Windows.)" FORCE)
-#endif ()
+# Set the default dependency directory. Original libsbml code replaced with libsemsim specific directory
+set(LIBSBML_DEPENDENCY_DIR ${DEPENDENCY_INSTALL_DIR})# CACHE PATH "Directory containing libraries that libSBML depends upon. (Particularly important on Windows.)")
+MESSAGE("LIBSBML_DEPENDENCY_DIR ${LIBSBML_DEPENDENCY_DIR}")
 
 if (WITH_PYTHON)
     # add option to enable Python API2 (with warnings)
     option(PYTHON_USE_API2_WARNINGS "Enable the new Python API2 with warnings." OFF)
 endif (WITH_PYTHON)
 
-message(STATUS "LIBSBML_DEPENDENCY_DIR ${LIBSBML_DEPENDENCY_DIR}")
-message(STATUS "DEPS_DIR ${DEPS_DIR}")
-
 ###############################################################################
 #
 # If WITH_SWIG is selected, we need to find swig
 #
-set(LIBSBML_USE_CPP_NAMESPACE OFF)
+set(LIBSBML_USE_CPP_NAMESPACE ON)
 if (WITH_CPP_NAMESPACE)
     add_definitions(-DLIBSBML_USE_CPP_NAMESPACE=1)
     set(LIBSBML_USE_CPP_NAMESPACE ON)
@@ -463,8 +454,7 @@ endif (WITH_EXPAT)
 #
 # Locate Libxml2 if needed
 #
-
-message(STATUS "LIBSBML_DEPENDENCY_DIR ${LIBSBML_DEPENDENCY_DIR}")
+MESSAGE(STATUS "LIBSBML_DEPENDENCY_DIR ${LIBSBML_DEPENDENCY_DIR}")
 
 set(USE_LIBXML ON)
 if (WITH_LIBXML)
