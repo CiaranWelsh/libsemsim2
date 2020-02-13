@@ -1,6 +1,7 @@
-cmake-build-debug
-cmake-build-release
+cmake-build-debug*
+cmake-build-release*
 build
+build*
 .idea
 .vs
 *.exe
@@ -8,4 +9,3 @@ build
 *.so
 *.a
 *.dylib
-_*

@@ -35,28 +35,28 @@ IF(RAPTOR_PARSER_TURTLE OR RAPTOR_PARSER_TRIG)
 #     turtle_parser.h
   )
 
-#  # Generate the turtle parser
-#  ADD_CUSTOM_TARGET(turtle_tables_tgt DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.c)
-#  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.c
-#    COMMAND ${BISON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/turtle_parser.y
-#    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/turtle_parser.y)
-#
-#  ADD_CUSTOM_TARGET(turtle_parser_tgt DEPENDS turtle_tables_tgt ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.c ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.h)
-#  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.c
-#    COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/raptor/scripts/fix-bison.pl ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.c > ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.c
-#    DEPENDS turtle_tables_tgt)
-#  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.h COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.h ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.h)
-#
-#  # Generate the turtle lexer
-#  ADD_CUSTOM_TARGET(turtle_flex_tgt DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t)
-#  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t
-#    COMMAND ${FLEX_EXECUTABLE} -o ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t ${CMAKE_CURRENT_SOURCE_DIR}/turtle_lexer.l
-#    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/turtle_lexer.l)
-#
-#  ADD_CUSTOM_TARGET(turtle_lexer_tgt DEPENDS turtle_flex_tgt)
-#  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.c
-#    COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/raptor/scripts/fix-flex.pl ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t > ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.c
-#    DEPENDS turtle_flex_tgt)
+  # Generate the turtle parser
+  ADD_CUSTOM_TARGET(turtle_tables_tgt DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.c)
+  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.c
+    COMMAND ${BISON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/turtle_parser.y
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/turtle_parser.y)
+
+  ADD_CUSTOM_TARGET(turtle_parser_tgt DEPENDS turtle_tables_tgt ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.c ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.h)
+  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.c
+    COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/raptor/scripts/fix-bison.pl ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.c > ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.c
+    DEPENDS turtle_tables_tgt)
+  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.h COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.tab.h ${CMAKE_CURRENT_BINARY_DIR}/turtle_parser.h)
+
+  # Generate the turtle lexer
+  ADD_CUSTOM_TARGET(turtle_flex_tgt DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t)
+  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t
+    COMMAND ${FLEX_EXECUTABLE} -o ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t ${CMAKE_CURRENT_SOURCE_DIR}/turtle_lexer.l
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/turtle_lexer.l)
+
+  ADD_CUSTOM_TARGET(turtle_lexer_tgt DEPENDS turtle_flex_tgt)
+  ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.c
+    COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/raptor/scripts/fix-flex.pl ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.t > ${CMAKE_CURRENT_BINARY_DIR}/turtle_lexer.c
+    DEPENDS turtle_flex_tgt)
 ENDIF(RAPTOR_PARSER_TURTLE OR RAPTOR_PARSER_TRIG)
 
 # RSS feed parser enabled

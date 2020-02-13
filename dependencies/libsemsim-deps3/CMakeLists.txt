@@ -38,5 +38,4 @@ important directories
 ")
 
 add_subdirectory(libsbml)
-# RAPTOR IS BROKEN, REDO AFTER OTHER DEPS ARE WORKING
-#add_subdirectory(raptor)
+add_subdirectory(raptor)
