@@ -22,15 +22,6 @@
 #
 ###############################################################################
 
-get_filename_component(PARENT_PROJECT_DIR ${PROJECT_SOURCE_DIR} DIRECTORY)
-set(DEPS_DIR ${PARENT_PROJECT_DIR}/deps)
-SET(DEPS_INCLUDE_DIR ${DEPS_DIR}/include)
-SET(DEPS_LIB_DIR ${DEPS_DIR}/lib)
-
-
-set(CMAKE_INSTALL_PREFIX ${DEPS_DIR})
-
-
 if (WITH_STATIC_RUNTIME)
     foreach (flag_var
             CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
@@ -101,7 +92,7 @@ include_directories(
         "${CMAKE_INSTALL_PREFIX}/zlib/source"
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
         "${CMAKE_CURRENT_SOURCE_DIR}"
-        "${DEPS_INCLUDE_DIR}"
+        "${DEPENDENCY_INCLUDE_DIR}"
 
 
 )
