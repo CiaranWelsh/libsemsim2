@@ -14,7 +14,7 @@ message(STATUS "
 Building libsemsim dependency package 1
 
 important directories
-----------------------
+---------------------
 
 - CMAKE_CURRENT_SOURCE_DIR  ${CMAKE_CURRENT_SOURCE_DIR}
 - CMAKE_INSTALL_PREFIX      ${CMAKE_INSTALL_PREFIX}
@@ -30,4 +30,5 @@ important directories
 add_subdirectory(libiconv)
 add_subdirectory(zlib)
 add_subdirectory(winflexbison)
+add_subdirectory(yajl)
 
