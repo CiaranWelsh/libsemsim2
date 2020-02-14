@@ -31,4 +31,5 @@ add_subdirectory(libiconv)
 add_subdirectory(zlib)
 add_subdirectory(yajl)
 add_subdirectory(googletest)
+add_subdirectory(prebuilt_binaries)
 

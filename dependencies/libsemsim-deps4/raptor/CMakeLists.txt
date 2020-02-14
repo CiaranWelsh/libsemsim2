@@ -34,9 +34,8 @@ FIND_PACKAGE(Perl  REQUIRED)
 # note: find_package for flex, bison and yajl were remove by
 # Ciaran Welsh as they are build as part of dependency package 1.
 # Here we set the variables that would have been set by find_package
-SET(FLEX_BISON_DIR ${DEPENDENCY_DIR}/lib/win_flex_bison)
-SET(BISON_EXECUTABLE ${FLEX_BISON_DIR}/win_bison.exe)
-SET(FLEX_EXECUTABLE ${FLEX_BISON_DIR}/win_flex.exe)
+SET(BISON_EXECUTABLE ${WINFLEXBISON_DIR}/win_bison.exe)
+SET(FLEX_EXECUTABLE ${WINFLEXBISON_DIR}/win_flex.exe)
 
 set(LIBXML2_LIBRARIES ${DEPENDENCY_LIB_DIR}/libxml2.lib )
 set(LIBXML2_INCLUDE_DIR ${DEPENDENCY_INCLUDE_DIR} )
