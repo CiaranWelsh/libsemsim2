@@ -5,13 +5,29 @@ project(libsemsim)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_subdirectory(lib/googletest)
+#add_subdirectory(lib/googletest)
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/INSTALL)
+set(DEPENDENCY_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/dependencies)
+set(DEPENDENCY_DIR ${DEPENDENCY_ROOT}/INSTALL)
+if (NOT EXISTS ${DEPENDENCY_ROOT})
+    message(FATAL_ERROR "DEPENDENCY_ROOT does not exist. This should evaluate \
+to a folder called 'dependencies' under libsemsim root.")
+endif()
 
-include_directories(
-        ${gtest_SOURCE_DIR}/include
-        ${gtest_SOURCE_DIR}
+if (NOT EXISTS ${DEPENDENCY_DIR})
+    message(FATAL_ERROR "DEPENDENCY_DIR does not exist. This should evaluate \
+to a folder called 'INSTALL' under the 'DEPENDENCY_ROOT' (${DEPENDENCY_ROOT}). Make \
+sure you have executed the batch or shell script that builds the dependencies")
+endif()
+
+
+
+
+
+#include_directories(
+#        ${gtest_SOURCE_DIR}/include
+#        ${gtest_SOURCE_DIR}
 #        semsim
 #        omex
 #        ontologies
@@ -23,28 +39,28 @@ include_directories(
 #        ${CMAKE_SOURCE_DIR}/semsim2
 #        ${CMAKE_SOURCE_DIR}/deps/include
 #        ${CMAKE_SOURCE_DIR}/deps/include/raptor2
-)
+#)
 # file(GLOB variable [RELATIVE path] [globbing expressions]...)
-SET(DEPS_DIR ${CMAKE_SOURCE_DIR}/deps)
-SET(DEPS_LIB_DIR ${DEPS_DIR}/lib)
-SET(DEPS_INCLUDE_DIR ${DEPS_DIR}/include)
-SET(DEPS_BIN_DIR ${DEPS_DIR}/bin)
-
-set(LIBSBML_LIB ${DEPS_LIB_DIR}/libsbml-static.lib)
-
-message(STATUS "DEPS_LIB_DIR ${DEPS_LIB_DIR}")
-#DEPS_LIB_DIRlink_directories(
-#        ${DEPS_LIB_DIR}/libCombine.lib
-#        ${DEPS_LIB_DIR}/libiconv.lib
-#        ${DEPS_LIB_DIR}/libsbml-static.lib
-#        ${DEPS_LIB_DIR}/libsbml.lib
-#        ${DEPS_LIB_DIR}/libxml2.lib
-#        ${DEPS_LIB_DIR}/libZipper-static.lib
-#        ${DEPS_LIB_DIR}/zdll.lib
-#        )
-
-add_subdirectory(semsim2)
-add_subdirectory(tests)
+#SET(DEPS_DIR ${CMAKE_SOURCE_DIR}/deps)
+#SET(DEPS_LIB_DIR ${DEPS_DIR}/lib)
+#SET(DEPS_INCLUDE_DIR ${DEPS_DIR}/include)
+#SET(DEPS_BIN_DIR ${DEPS_DIR}/bin)
+#
+#set(LIBSBML_LIB ${DEPS_LIB_DIR}/libsbml-static.lib)
+#
+#message(STATUS "DEPS_LIB_DIR ${DEPS_LIB_DIR}")
+##DEPS_LIB_DIRlink_directories(
+##        ${DEPS_LIB_DIR}/libCombine.lib
+##        ${DEPS_LIB_DIR}/libiconv.lib
+##        ${DEPS_LIB_DIR}/libsbml-static.lib
+##        ${DEPS_LIB_DIR}/libsbml.lib
+##        ${DEPS_LIB_DIR}/libxml2.lib
+##        ${DEPS_LIB_DIR}/libZipper-static.lib
+##        ${DEPS_LIB_DIR}/zdll.lib
+##        )
+#
+#add_subdirectory(semsim2)
+#add_subdirectory(tests)
 
 # first we can indicate the documentation build as an option and set it to ON by default
 #option(BUILD_DOC "Build documentation" ON)
