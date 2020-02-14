@@ -38,4 +38,5 @@ important directories
 ")
 
 add_subdirectory(libsbml)
-add_subdirectory(raptor)
+
+

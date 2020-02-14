@@ -38,4 +38,3 @@ important directories
 add_subdirectory(libxml2)
 add_subdirectory(zipper)
 
-#target_include_directories(../deps)
