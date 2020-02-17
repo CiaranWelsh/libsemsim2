@@ -5,6 +5,7 @@
 # include "PhysicalProperty.h"
 
 # include <raptor2.h>
+#include <memory>
 
 namespace semsim {
     /**

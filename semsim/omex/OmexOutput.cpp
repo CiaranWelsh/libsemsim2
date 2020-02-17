@@ -1,5 +1,4 @@
 # include "omex/OmexOutput.h"
-
 # include "combine/combinearchive.h"
 # include "combine/knownformats.h"
 # include "combine/omexdescription.h"

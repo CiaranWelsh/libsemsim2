@@ -6,10 +6,17 @@
 
 namespace semsim2 {
 
-
     SBMLReader::SBMLReader(std::string filename) {
         this->filename = filename;
         document = reader.readSBMLFromFile(filename);
     }
 
 }
+
+
+
+
+
+
+
+

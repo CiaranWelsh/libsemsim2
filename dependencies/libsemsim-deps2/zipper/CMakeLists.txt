@@ -60,6 +60,14 @@ set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
 
 set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_CURRENT_BINARY_DIR};/.svn/;/.libs/;/.deps/;/.bzr/;.*.o$;.*.lo$;.*.la$;/.git/;${CPACK_SOURCE_IGNORE_FILES};/.DS_Store;/.svnignore;blib;libsbml-dist;*.txt.user")
 
+
+if(${CMAKE_BUILD_TYPE} STREQUAL "[rR]elease")
+    set(_ITERATOR_DEBUG_LEVEL 0)
+elseif(${CMAKE_BUILD_TYPE} STREQUAL "[dDebug]")
+    set(_ITERATOR_DEBUG_LEVEL 2)
+endif()
+
+
 set(ADDITIONAL_LIB_DIRS)
 if(CMAKE_SIZEOF_VOID_P EQUAL 4)
     set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "i386")
@@ -89,15 +97,15 @@ if (UNIX)
 else()
   set(ZIPPER_LIBRARY libZipper)
 endif()
-# Set build type default.
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING
-  "Choose the type of build to perform. The options are: None (CMAKE_CXX_FLAGS
-or CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel.")
-if("${CMAKE_BUILD_TYPE}" STREQUAL "")
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING
-    "Choose the type of build to perform. The options are: None (CMAKE_CXX_FLAGS
-or CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
-endif()
+## Set build type default.
+#set(CMAKE_BUILD_TYPE "Release" CACHE STRING
+#  "Choose the type of build to perform. The options are: None (CMAKE_CXX_FLAGS
+#or CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel.")
+#if("${CMAKE_BUILD_TYPE}" STREQUAL "")
+#  set(CMAKE_BUILD_TYPE "Release" CACHE STRING
+#    "Choose the type of build to perform. The options are: None (CMAKE_CXX_FLAGS
+#or CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
+#endif()
 
 
 
