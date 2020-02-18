@@ -2,7 +2,6 @@
 # define SEMSIM_SBML_ACCESSORS_H_
 
 # include "Preproc.h"
-
 # include "sbml/SBMLTypes.h"
 
 namespace semsim {

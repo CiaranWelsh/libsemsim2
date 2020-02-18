@@ -37,7 +37,7 @@ namespace semsim {
        * Construct a libSemSim @ref SBMLModel from an SBML document.
        * @param d The input SBML document.
        */
-      SBMLImporter(LIBSBML_CPP_NAMESPACE_QUALIFIER SBMLDocument* d)
+      explicit SBMLImporter(LIBSBML_CPP_NAMESPACE_QUALIFIER SBMLDocument* d)
         : m_(d->getModel()), result_(d) {
         for(unsigned int k=0; k<m_->getNumCompartments(); ++k) {
           LIBSBML_CPP_NAMESPACE_QUALIFIER Compartment* c = m_->getCompartment(k);
