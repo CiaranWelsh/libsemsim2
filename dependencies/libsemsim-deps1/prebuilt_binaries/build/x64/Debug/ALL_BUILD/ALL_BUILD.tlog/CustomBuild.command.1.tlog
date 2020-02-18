@@ -1,0 +1,10 @@
+^D:\LIBSEMSIM2\DEPENDENCIES\PREBUILT_BINARIES\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/libsemsim2/dependencies/prebuilt_binaries -BD:/libsemsim2/dependencies/prebuilt_binaries/build --check-stamp-file D:/libsemsim2/dependencies/prebuilt_binaries/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

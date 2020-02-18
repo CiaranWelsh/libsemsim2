@@ -1,0 +1,22 @@
+C:\Users\cwelsh\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\193.6015.37\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" D:\libsemsim2\dependencies\prebuilt_binaries
+-- 
+Building libsemsim dependency package 1
+
+important directories
+---------------------
+
+- CMAKE_CURRENT_SOURCE_DIR  D:/libsemsim2/dependencies/prebuilt_binaries
+- CMAKE_INSTALL_PREFIX      D:/libsemsim2/dependencies/INSTALL
+- DEPENDENCY_DIR            D:/libsemsim2/dependencies
+- DEPENDENCY_BUILD_DIR      D:/libsemsim2/dependencies/BUILD
+- DEPENDENCY_INSTALL_DIR    D:/libsemsim2/dependencies/INSTALL
+- DEPENDENCY_INCLUDE_DIR    D:/libsemsim2/dependencies/INSTALL/include
+- DEPENDENCY_LIB_DIR        D:/libsemsim2/dependencies/INSTALL/lib
+- DEPENDENCY_BIN_DIR        D:/libsemsim2/dependencies/INSTALL/bin
+
+
+-- Configuring done
+CMake Error: Cannot determine link language for target "DUMMY".
+CMake Error: CMake can not determine linker language for target: DUMMY
+-- Generating done
+CMake Generate step failed.  Build files cannot be regenerated correctly.

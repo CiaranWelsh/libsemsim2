@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\libsemsim2\dependencies\prebuilt_binaries\build\CMakeFiles\ae000f8e06c7437c76a3699c64de82da\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{CBE8BE46-BD2F-388D-A7EC-9CBF5CBFFD72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
