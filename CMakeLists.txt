@@ -13,6 +13,7 @@ set(DEPENDENCY_DIR ${DEPENDENCY_ROOT}/INSTALL)
 set(DEPENDENCY_LIB_DIR ${DEPENDENCY_DIR}/lib)
 set(DEPENDENCY_INCLUDE_DIR ${DEPENDENCY_DIR}/include)
 set(DEPENDENCY_BIN_DIR ${DEPENDENCY_DIR}/bin)
+set(GOOGLETEST_DIR ${DEPENDENCY_DIR}/googletest)
 
 if (NOT EXISTS ${DEPENDENCY_ROOT})
     message(FATAL_ERROR "DEPENDENCY_ROOT does not exist. This should evaluate \
@@ -24,9 +25,9 @@ if (NOT EXISTS ${DEPENDENCY_DIR})
 to a folder called 'INSTALL' under the 'DEPENDENCY_ROOT' (${DEPENDENCY_ROOT}). Make \
 sure you have executed the batch or shell script that builds the dependencies")
 endif()
-
-add_subdirectory(semsim)
-#add_subdirectory(tests)
+add_subdirectory(${DEPENDENCY_DIR}/googletest)
+add_subdirectory(semsim2)
+add_subdirectory(tests)
 
 MESSAGE(STATUS "
 DEPENDENCY_ROOT                 ${DEPENDENCY_ROOT}
@@ -34,6 +35,7 @@ DEPENDENCY_DIR                  ${DEPENDENCY_DIR}
 DEPENDENCY_LIB_DIR              ${DEPENDENCY_LIB_DIR}
 DEPENDENCY_INCLUDE_DIR          ${DEPENDENCY_INCLUDE_DIR}
 DEPENDENCY_BIN_DIR              ${DEPENDENCY_BIN_DIR}
+GOOGLETEST_DIR                  ${GOOGLETEST_DIR}
 ")
 
 

@@ -65,6 +65,7 @@ target_include_directories(libsemsim.lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/rdf
         ${CMAKE_CURRENT_SOURCE_DIR}/sbml
         ${CMAKE_CURRENT_SOURCE_DIR}/util
+
         ${DEPENDENCY_INCLUDE_DIR}
         ${DEPENDENCY_INCLUDE_DIR}/combine
         ${DEPENDENCY_INCLUDE_DIR}/gmock
@@ -82,7 +83,8 @@ target_link_directories(libsemsim.lib PUBLIC ${DEPENDENCY_LIB_DIR})
 target_link_libraries(libsemsim.lib
         ${DEPENDENCY_LIB_DIR}/libCombine.lib
         ${DEPENDENCY_LIB_DIR}/libiconv.lib
-        ${DEPENDENCY_LIB_DIR}/libsbml.lib
+#        ${DEPENDENCY_LIB_DIR}/libsbml.lib
+        ${DEPENDENCY_LIB_DIR}/libsbml-static.lib
         ${DEPENDENCY_LIB_DIR}/libxml2.lib
         ${DEPENDENCY_LIB_DIR}/raptor2.lib
         ${DEPENDENCY_LIB_DIR}/zdll.lib

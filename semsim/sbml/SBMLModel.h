@@ -13,11 +13,11 @@
 
 # include "sbml/SBMLTypes.h"
 
-# if __cplusplus >= 201103L
+//# if __cplusplus >= 201103L
 # include <unordered_map>
-# else
-# include <tr1/unordered_map>
-# endif
+//# else
+//# include <tr1/unordered_map>
+//# endif
 
 # if defined SWIG
 # define LIBSBML_CPP_NAMESPACE_QUALIFIER
